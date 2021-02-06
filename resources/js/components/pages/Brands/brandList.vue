@@ -117,7 +117,6 @@ getResults(page = 1) {
 			axios.get('/brands?page=' + page)
 				.then(response => {
           this.allbrands = response.data.brands;
-          console.log(response.data);
 				});
 		},
   ///delete brand-------------
@@ -141,6 +140,13 @@ getResults(page = 1) {
       'success'
     )
   this.getResults();
+  }else if(response.status==500){
+    Swal.fire(
+      'Failed!',
+      'Product of this Brand exist.',
+      'error'
+    )
+ this.getResults();
   }
 }).catch((error)=>{
 Swal.fire(

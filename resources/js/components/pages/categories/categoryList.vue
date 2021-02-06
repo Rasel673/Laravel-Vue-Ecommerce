@@ -131,8 +131,9 @@ getResults(page = 1) {
 			axios.get('/categories?page=' + page)
 				.then(response => {
           this.allCategories = response.data.categories;
-          console.log(response.data);
-				});
+				}).catch((error)=>{
+          console.log("something went wrong")
+        });
 		},
   ///delete category-------------
  remove(slug){
@@ -153,6 +154,13 @@ getResults(page = 1) {
       'Deleted!',
       'Your file has been deleted.',
       'success'
+    )
+ this.getResults();
+  }else if(response.status==500){
+    Swal.fire(
+      'Failed!',
+      'Product of this Category exist.',
+      'error'
     )
  this.getResults();
   }

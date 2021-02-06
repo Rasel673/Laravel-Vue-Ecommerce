@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Category;
+use App\Product;
 class CategoryController extends Controller
 {
     /**
@@ -27,7 +28,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $categories=Category::where('status',1)->get();
+        return $categories;
     }
 
     /**
@@ -103,13 +105,21 @@ class CategoryController extends Controller
      */
     public function destroy($slug)
     {
-        $delete=Category::where('slug',$slug)->delete();
-        if($delete){
-            return response()->json(['Delete Success'],200);
+        $category=Category::where('slug',$slug)->first();
+        $cat_id=$category->id;
+        $product=Product::where('categories_id',$cat_id)->count();
+        if($product!=0){
+            $categorydelete=Category::where('slug',$slug)->delete();
+            if($categorydelete){
+                return response()->json(['Delete Success'],200);
+            }else{
+                return response()->json(['Delete failed'],404);
+                
+            }
+         
         }else{
-            return response()->json(['Delete Failed'],500);
+            return response()->json(['Delete Failed!! Product of this category exist'],500);
         }
       
-        
     }
 }

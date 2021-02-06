@@ -15,6 +15,10 @@ import editCategory from './components/pages/categories/editCategory'
 import  Brands from './components/pages/Brands/brandList'
 import addBrand from './components/pages/Brands/addBrand'
 import editBrand from './components/pages/Brands/editBrand'
+//product routes----------------------
+import  Produtcs from './components/pages/products/productList'
+import addProcuct from './components/pages/products/addProduct'
+import editProduct from './components/pages/products/editProduct'
  const router=new VueRouter({
 //   mode:'history',
  routes:[
@@ -27,7 +31,11 @@ import editBrand from './components/pages/Brands/editBrand'
 ///brand route-----------------------------------
 { path:'/brands',component:Brands},
 { path:'/Add-brand', component:addBrand },
-{ path:'/edit-brand/:slug', component:editBrand }
+{ path:'/edit-brand/:slug', component:editBrand },
+//product route------------------------------
+{ path:'/products',component:Produtcs},
+{ path:'/Add-product', component:addProcuct},
+{ path:'/edit-product/:slug', component:editProduct },
 
       ]
      

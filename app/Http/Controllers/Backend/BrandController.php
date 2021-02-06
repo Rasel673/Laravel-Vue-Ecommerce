@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
 use App\Brand;
+use App\Product;
+
 
 class BrandController extends Controller
 {
@@ -29,7 +31,9 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        //get active brands only--------
+        $brands=Brand::where('status',1)->get();
+        return $brands;
     }
 
     /**
@@ -41,7 +45,7 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'name' => 'required|unique:categories',
+            'product_id' => 'required|unique:categories',
             'status' => 'required',
             'image' => 'required',
         ]);
@@ -121,14 +125,21 @@ if($imageStatus!=null){
      */
     public function destroy($slug)
     {
-        $dltimg=Brand::where('slug',$slug)->select('brands.image')->first();
+        $brand=Brand::where('slug',$slug)->first();
+        $brand_id=$brand->id;
+        $product=Product::where('brand_id',$brand_id)->count();
+        if($product!=0){
+        $dltimg=Brand::where('slug',$slug)->select('brands.image')->first(); 
         $deleteImg=unlink(base_path('public/Brand_photo/'.$dltimg->image));
         if($deleteImg){
             $delete=Brand::where('slug',$slug)->delete();
             return response()->json(['Delete Success'],200);
         }else{
-            return response()->json(['Delete Failed'],500);
+            return response()->json(['Delete Failed'],404);
         }
+    }else{
+        return response()->json(['Delete Failed!! Product of this Brand exist'],500);
+    }
       
     }
 }

@@ -45,6 +45,12 @@
                 Brands
             </router-link>
           </li>
+          <li class="nav-item active">
+            <router-link to="/products" class="nav-link" active-class="active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+                Products
+            </router-link>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

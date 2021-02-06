@@ -46,7 +46,10 @@ const Toast = Swal.mixin({
   })
 
   window.Toast=Toast;
-  
+  ///cke editor---------------------
+  import CKEditor from '@ckeditor/ckeditor5-vue2';
+
+Vue.use( CKEditor );
 
 const app = new Vue({
     el: '#app',
