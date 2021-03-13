@@ -51,6 +51,18 @@
                 Products
             </router-link>
           </li>
+          <li class="nav-item active">
+            <router-link to="/colors" class="nav-link" active-class="active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+                Colors
+            </router-link>
+          </li>
+          <li class="nav-item active">
+            <router-link to="/sizes" class="nav-link" active-class="active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+                Sizes
+            </router-link>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

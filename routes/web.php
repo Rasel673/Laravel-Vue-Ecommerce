@@ -26,3 +26,8 @@ Route::resource('categories', 'Backend\CategoryController');
 Route::resource('brands', 'Backend\BrandController');
 //Product Controller---------------------------------
 Route::resource('products', 'Backend\ProductController');
+///Size Controller----------------------------
+Route::resource('sizes', 'Backend\SizeController');
+//Color Controller-----------------------
+Route::resource('colors', 'Backend\ColorController');
+

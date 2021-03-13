@@ -114,10 +114,6 @@
                       <has-error :form="form" field="product_qty"></has-error>
                     </div>
                   </div>
-
-
-
-
                   <div class="form-group row">
                    <div class="col-sm-6">
                        <label  class="col-form-label">Category</label>
@@ -153,60 +149,32 @@
                         </label>
                      </div>
    
-
-                          <div class="col-sm-4">
-                    <!-- checkbox -->
-                    <div class="form-group clearfix">
-                      
-                      <div class="icheck-primary d-inline">
-                        <input type="checkbox" id="checkboxPrimary1" class="primary p-2">
+                    <div class="col-sm-4">
+                      <div class="icheck-primary d-inline m-1" v-for="color in colors" :key="color.color_id">
+                        <input type="checkbox"   class="primary p-2" :value="color.color_id" v-model="form.product_color">
                         <label for="checkboxPrimary1">
+                          {{color.color_name}}
                         </label>
                       </div>
-                      <div class="icheck-primary d-inline">
-                        <input type="checkbox" id="checkboxPrimary2">
-                        <label for="checkboxPrimary2">
-                        </label>
-                      </div>
-                
-                    </div>
-                  </div>
-                   <!-- <div class="col-sm-6">
-                       <label  class="col-form-label">Color</label>
-
-
-                    <select class="custom-select form-control-border border-width-2"  :class="{ 'is-invalid': form.errors.has('product_color') }" v-model="form.product_color">
-                    <option>------select color------</option>
-                    <option value="black">Black</option>
-                    <option value="green">Green</option>
-                  </select>
-                 <has-error :form="form" field="product_color"></has-error>
-                    </div> -->
-
-
-
+                 </div>
+                 
                   <div class="col-sm-2">
                     <label  class="col-form-label">Product Size:</label>
                      </div>
+
                     <div class="col-sm-4">
-                      <div class="icheck-primary d-inline m-1" v-for="option in sizeOption.options.size" :key="option.value">
-                        <input type="checkbox"   class="primary p-2" :value="option.value" v-model="form.product_size">
+                      <div class="icheck-primary d-inline m-1" v-for="size in sizes" :key="size.size_id">
+                        <input type="checkbox"   class="primary p-2" :value="size.size_id" v-model="form.product_size">
                         <label for="checkboxPrimary1">
-                          {{option.label}}
+                          {{size.size_name}}
                         </label>
                       </div>
-                  <!-- <select class="custom-select form-control-border border-width-2"   :class="{ 'is-invalid': form.errors.has('product_size') }"    v-model="form.product_size" multiple>
-                    <option>------select size--------</option>
-                    <option>S</option>
-                    <option>M</option>
-                    <option>L</option>
-                    <option>XL</option>
-                    <option>XXL</option>
-                  </select>
-                      <has-error :form="form" field="product_size"></has-error> -->
+                 
                     </div>
+
                   </div>
-  <div class="form-group row">
+
+                  <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Status</label>
 
                   <div class="form-group row">
@@ -308,8 +276,6 @@ form: new Form({
  product_qty:'',
  status:null,
  product_photo:'',
- product_img_two:'',
- product_img_three:'',
  product_size:[],
  product_color:[],
 }),
@@ -318,9 +284,8 @@ upImage:false,
     editorConfig: {},
     categories:[],
     brands:[],
-
-
-
+    sizes:[],
+    colors:[]
 }
 },
 watch:{
@@ -329,6 +294,8 @@ watch:{
 mounted(){
 this.category()
 this.Brand()
+this.Color()
+this.Size()
 },
 
 methods:{
@@ -352,6 +319,23 @@ this.brands=response.data;
   console.log(error.data);
 });
 },
+///fetch product size--------------------
+Size(){
+  axios.get('sizes/create').then((response)=>{
+this.sizes=response.data;
+  }).catch((error)=>{
+console.log("something went wrong")
+  })
+},
+///fetch product color--------------------
+Color(){
+  axios.get('colors/create').then((response)=>{
+this.colors=response.data;
+  }).catch((error)=>{
+ console.log("something went wrong") 
+  })
+},
+
   ///add product-----------------------------
  addProduct(){
 this.form.post('/products').then((response)=>{
@@ -395,14 +379,7 @@ this.form.post('/products').then((response)=>{
 })
  }
 },
- ///mutiple Size method-------------
-//  multiSelect(event){
-// if(event.target.checked){
-// this.sizeOption.options.size.forEach(sizes => {
-//   this.form.product_size.push(sizes.value);
-// });
-// }
-//  },
+
 
 
 

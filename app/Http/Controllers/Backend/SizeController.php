@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Size;
+use App\Product_Size;
 
 class SizeController extends Controller
 {
@@ -14,7 +16,10 @@ class SizeController extends Controller
      */
     public function index()
     {
-        //
+        $sizes=Size::paginate(3);
+        return response()->json([
+            'sizes'=>$sizes
+        ],200);
     }
 
     /**
@@ -24,7 +29,8 @@ class SizeController extends Controller
      */
     public function create()
     {
-        //
+        $Sizes=Size::all();
+        return $Sizes;
     }
 
     /**
@@ -35,7 +41,17 @@ class SizeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'size_name' => 'required|unique:Sizes',
+            'size_value' => 'required',
+        ]);
+
+       Size::create([
+           'size_name'=>$request->size_name,
+           'slug'=>slugify($request->size_name),
+           'size_value'=>$request->size_value
+       ]);
+
     }
 
     /**
@@ -55,9 +71,10 @@ class SizeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $singleSize=Size::where('slug',$slug)->first();
+        return $singleSize;
     }
 
     /**
@@ -67,9 +84,19 @@ class SizeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$slug)
     {
-        //
+        $this->validate($request,[
+            'size_name' => 'required',
+            'size_value' => 'required',
+        ]);
+
+
+       Size::where('slug',$slug)->update([
+        'size_name'=>$request->size_name,
+        'slug'=>slugify($request->size_name),
+        'size_value'=>$request->size_value
+       ]);
     }
 
     /**
@@ -78,8 +105,20 @@ class SizeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($slug)
     {
-        //
+        $Size=Size::where('slug',$slug)->first();
+        $Size_id=$Size->size_id;
+        $product=Product_Size::where('size_id',$Size_id)->count();
+        if($product==0){
+            $Sizedelete=Size::where('slug',$slug)->delete();
+            if($Sizedelete){
+                return response()->json(['Delete Success'],200);
+            }else{
+                return response()->json(['Delete failed'],500);
+            }
+        }else{
+            return response()->json(['Delete Failed!! Size of this Size exist'],400);
+        }
     }
 }

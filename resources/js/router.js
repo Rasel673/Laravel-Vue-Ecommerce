@@ -19,6 +19,15 @@ import editBrand from './components/pages/Brands/editBrand'
 import  Produtcs from './components/pages/products/productList'
 import addProcuct from './components/pages/products/addProduct'
 import editProduct from './components/pages/products/editProduct'
+import viewProduct from './components/pages/products/viewProduct'
+///color routes-----------------------------
+import Colors from './components/pages/colors/colorList'
+import AddColor from './components/pages/colors/addColor'
+import editColor from './components/pages/colors/editColor'
+///sizes routes-----------------------------
+import Sizes from './components/pages/sizes/sizeList'
+import AddSize from './components/pages/sizes/addSize'
+import editSize from './components/pages/sizes/editSize'
  const router=new VueRouter({
 //   mode:'history',
  routes:[
@@ -36,7 +45,15 @@ import editProduct from './components/pages/products/editProduct'
 { path:'/products',component:Produtcs},
 { path:'/Add-product', component:addProcuct},
 { path:'/edit-product/:slug', component:editProduct },
-
+{ path:'/view-product/:product_id',component:viewProduct},
+///colors route-----------------------
+{ path:'/colors',component:Colors},
+{ path:'/Add-color', component:AddColor},
+{ path:'/edit-color/:slug', component:editColor },
+///sizes route-----------------------
+{ path:'/sizes',component:Sizes},
+{ path:'/Add-size', component:AddSize},
+{ path:'/edit-size/:slug',component:editSize },
       ]
      
   })

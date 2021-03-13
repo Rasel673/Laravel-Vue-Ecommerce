@@ -1,5 +1,5 @@
 <template>
-<div>
+    <div>
        <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -10,13 +10,12 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">Home</li>
-              <li class="breadcrumb-item"><a href="#">product</a></li>
+              <li class="breadcrumb-item"><a href="#">size</a></li>
             </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -24,66 +23,61 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Product  List</h3>
-                <router-link to="/Add-product" class="btn  btn-primary float-right"><i class="fas fa-plus-circle"></i></router-link>
+                <h3 class="card-title">Size List</h3>
+                <router-link to="/Add-size" class="btn  btn-primary float-right"><i class="fas fa-plus-circle"></i></router-link>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                
+               
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-
+                
                     <th>SL.NO.</th>
-                    <th>Image</th>
                     <th>Name</th>
-                    <th>Code</th>
-                    <th>Price</th>
+                    <th>Value</th>
                     <th>Slug</th>
-                    <th>Status</th>
                     <th>Action</th>
                   </tr>
                   
                   </thead>
                   <tbody>
             
-                  <tr v-for="(product,i) in allproducts.data" :key="i">
+                  <tr v-for="(size,i) in allsizes.data" :key="i">
                     <td>{{++i}}</td>
-                     <td><img :src="'product_photo/'+product.product_photo" height="80" width="80"></td>
-                    <td>{{product.product_name}}</td> 
-                    <td>{{product.product_code}}</td> 
-                    <td>{{product.product_price}}</td> 
-                    <td>{{product.slug}}</td> 
-                    <td v-if="product.status==1">
-                    <span class="badge badge-success">Active</span>
-                    
-                    </td>
+                    <td>{{size.size_name}}</td> 
+                    <td>{{size.size_value}}</td> 
+                    <td>{{size.slug}}</td> 
+                    <!-- <td v-if="size.status==1">
+                        <span class="badge badge-success">Active</span> -->
+                      <!-- Checked switch
+<div class="custom-control custom-switch">
+  <input type="checkbox" class="custom-control-input" id="customSwitch1" checked>
+  <label class="custom-control-label" for="customSwitch1"></label>
+</div> -->
+                    <!-- </td>
                     <td v-else>
                         <span class="badge badge-danger">Deactive</span>
-                    </td>
+                    </td> -->
                     <td>
-                      <router-link :to="`/edit-product/${product.slug}`" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></router-link>
-                       <router-link :to="`/view-product/${product.product_id}`" class="btn btn-sm btn-success"><i class="fas fa-eye"></i></router-link>
-                      <a class="btn btn-sm btn-danger" @click="remove(product.slug)"><i class="fas fa-trash"></i></a>
+                      <router-link :to="`/edit-size/${size.slug}`" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></router-link>
+                      <a class="btn btn-sm btn-danger" @click="remove(size.slug)"><i class="fas fa-trash"></i></a>
                     </td>
                 
                   </tr>
 
-                  <tr v-if="allproducts.data<1">
+                  <tr v-if="allsizes.length<1">
                     <td class="text-center text-danger" colspan="6">No Data found</td>
                   </tr>
                 
                   </tbody>
                   <tfoot>
                   <tr>
-                
+                    <th v-if="allsizes.length>0"></th>
                     <th>SL.NO.</th>
-                    <th>Image</th>
                     <th>Name</th>
-                    <th>Code</th>
-                    <th>Price</th>
+                    <th>Value</th>
                     <th>Slug</th>
-                    <th>Status</th>
                     <th>Actiion</th>
                   </tr>
                   </tfoot>
@@ -91,7 +85,7 @@
               </div>
               <!-- /.card-body -->
               <div class="card-footer">
-                <pagination :data="allproducts" @pagination-change-page="getResults"></pagination>
+                <pagination :data="allsizes" @pagination-change-page="getResults"></pagination>
               </div>
             </div>
             <!-- /.card -->
@@ -102,32 +96,39 @@
       </div>
       <!-- /.container-fluid -->
     </section>
-    </div>  
+
+         
+    </div>
 </template>
 
 <script>
+import pagination from 'laravel-vue-pagination'
 export default {
-    data(){
+data(){
   return{
- allproducts:{}
+ allsizes:{}
   }
 },
 mounted(){
-this.getResults();
+ this.getResults();
+
 },
 watch:{
-
+ 
 },
-
+computed:{
+  
+},
 methods:{
 getResults(page = 1) {
-			axios.get('/products?page=' + page)
+			axios.get('/sizes?page=' + page)
 				.then(response => {
-          this.allproducts = response.data.products;
-         
-				});
+          this.allsizes = response.data.sizes;
+				}).catch((error)=>{
+          console.log("something went wrong")
+        });
 		},
-  ///delete product-------------
+  ///delete size-------------
  remove(slug){
    Swal.fire({
   title: 'Are you sure?',
@@ -139,7 +140,7 @@ getResults(page = 1) {
   confirmButtonText: 'Yes, delete it!'
 }).then((result) => {
   if (result.isConfirmed) {
-    axios.delete('products/'+slug).then((response)=>{
+    axios.delete('sizes/'+slug).then((response)=>{
 
       if(response.status==200){
  Swal.fire(
@@ -147,7 +148,14 @@ getResults(page = 1) {
       'Your file has been deleted.',
       'success'
     )
-  this.getResults();
+ this.getResults();
+  }else if(response.status==400){
+    Swal.fire(
+      'Failed!',
+      'Product of this size exist.',
+      'error'
+    )
+ this.getResults();
   }
 }).catch((error)=>{
 Swal.fire(
@@ -166,8 +174,8 @@ Swal.fire(
 }
 
 
-
 }
+
 </script>
 
 <style>

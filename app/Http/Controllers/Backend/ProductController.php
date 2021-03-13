@@ -6,6 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
 use App\Product;
+use App\Product_Color;
+use App\Color;
+use App\Size;
+use App\Product_Size;
+use DB;
 
 class ProductController extends Controller
 {
@@ -42,15 +47,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-
-        // $Sizes=$request->product_size;
-        // if($Sizes!=null)
-        // foreach($Sizes as $size)
-
-
-        // return $Sizes;
-
-        // exit();
         $this->validate($request,[
             'brand_id' => 'required',
             'categories_id' => 'required',
@@ -92,14 +88,30 @@ class ProductController extends Controller
                 'product_code'=>$request->product_code,
                 'product_qty'=>$request->product_qty,
                 'status'=>$request->status,
-                'product_photo'=>$photoname,
-                // 'product_img_two'=>$photoname,
-                // 'product_img_three'=>$photoname,
-                // 'product_size'=>$request->product_size,
-                // 'product_color'=>$request->product_color
+                'product_photo'=>$photoname
             ]);
+          
+        ///product color save----------------------
+        $colors=$request->product_color;
+        if(!empty($colors)){
+        foreach($colors as $color){
+         $newColor=new Product_Color;
+         $newColor->product_id=$add;
+         $newColor->color_id=$color;
+         $newColor->save();
+        }
 
-       
+        }
+   ///product size save---------------------
+        $sizes=$request->product_size;
+        if(!empty($sizes)){
+        foreach($sizes as $size){
+         $newSize=new Product_Size;
+         $newSize->product_id=$add;
+         $newSize->size_id=$size;
+         $newSize->save();
+        }
+    }
 
         }
     }
@@ -112,7 +124,51 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product['product']=DB::table('products')
+        ->join('categories','products.categories_id','=','categories.id')
+        ->join('brands','products.brand_id','=','brands.id')
+        ->select('products.*','categories.name as category','brands.name as brand')
+        ->where('products.product_id',$id)
+        ->get();
+
+           ///color section=================================
+           $colorProduct =Product_Color::select('color_id')->where('product_id',$id)->get();
+           if(count($colorProduct)>0){
+           foreach($colorProduct as $colorID){
+                   $colors[]=Color::select('color_name')->where('color_id',$colorID['color_id'])->get();
+           }
+   
+    ///color value insert insert single product array-------
+   foreach($colors as $allColor){
+       foreach($allColor as $selectColor){
+           $getColor[]=$selectColor;
+       }
+       }
+       }else{
+           $getColor=null;
+       }
+   
+      
+   ////sizes sectiion==================================================
+   $sizeProduct =Product_Size::select('size_id',)->where('product_id',$id)->get();
+   if(count($sizeProduct)>0){
+           foreach($sizeProduct as $sizeID){
+               $sizes[]=Size::select('size_name')->where('size_id',$sizeID['size_id'])->get();
+       }
+   //size value insert insert single product array-------
+   foreach($sizes as $allSizes){
+       foreach($allSizes as $selectSize){
+           $getSizes[]=$selectSize;
+       }
+       }
+       
+   }else{
+       $getSizes=null;
+   }
+   $product['colors']=$getColor;
+   $product['sizes']=$getSizes;
+           return $product;
+        
     }
 
     /**
@@ -124,6 +180,44 @@ class ProductController extends Controller
     public function edit($slug)
     {
         $singleProduct=Product::where('slug',$slug)->first();
+        $id=$singleProduct->product_id;
+
+        ///color section=================================
+        $colorProduct =Product_Color::select('color_id')->where('product_id',$id)->get();
+        if(count($colorProduct)>0){
+        foreach($colorProduct as $colorID){
+                $colors[]=Color::select('color_name')->where('color_id',$colorID['color_id'])->get();
+        }
+
+ ///color value insert insert single product array-------
+foreach($colors as $allColor){
+    foreach($allColor as $selectColor){
+        $getColor[]=$selectColor;
+    }
+    }
+    }else{
+        $getColor=null;
+    }
+
+   
+////sizes sectiion==================================================
+$sizeProduct =Product_Size::select('size_id',)->where('product_id',$id)->get();
+if(count($sizeProduct)>0){
+        foreach($sizeProduct as $sizeID){
+            $sizes[]=Size::select('size_name')->where('size_id',$sizeID['size_id'])->get();
+    }
+//size value insert insert single product array-------
+foreach($sizes as $allSizes){
+    foreach($allSizes as $selectSize){
+        $getSizes[]=$selectSize;
+    }
+    }
+    
+}else{
+    $getSizes=null;
+}
+        $singleProduct['selectedColors']=$getColor;
+        $singleProduct['sizes']=$getSizes;
         return $singleProduct;
     }
 
