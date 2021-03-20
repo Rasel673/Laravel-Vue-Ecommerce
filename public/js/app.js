@@ -69406,7 +69406,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_pages_sizes_editSize__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/pages/sizes/editSize */ "./resources/js/components/pages/sizes/editSize.vue");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
-Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
+Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]); //backend routes import==========================================
+
  ///category routes-----------------------------
 
 
@@ -69428,6 +69429,8 @@ Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 
 
+ //frontend route import here==================================================
+// import Index from './components/frontend/layouts/index'
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   //   mode:'history',
@@ -69487,7 +69490,11 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   }, {
     path: '/edit-size/:slug',
     component: _components_pages_sizes_editSize__WEBPACK_IMPORTED_MODULE_17__["default"]
-  }]
+  } ///frontend routes here------------------------------
+  // { path:'/',
+  // name:Index,
+  // component:Index },
+  ]
 });
 /* harmony default export */ __webpack_exports__["default"] = (router);
 

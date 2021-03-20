@@ -1,12 +1,8 @@
 window.Vue = require('vue');
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
-
-
-
+//backend routes import==========================================
 import Dashboard from './components/pages/dashboard'
-
-
 ///category routes-----------------------------
 import Category from './components/pages/categories/categoryList'
 import AddCategory from './components/pages/categories/addCategory'
@@ -28,6 +24,8 @@ import editColor from './components/pages/colors/editColor'
 import Sizes from './components/pages/sizes/sizeList'
 import AddSize from './components/pages/sizes/addSize'
 import editSize from './components/pages/sizes/editSize'
+//frontend route import here==================================================
+// import Index from './components/frontend/layouts/index'
  const router=new VueRouter({
 //   mode:'history',
  routes:[
@@ -54,7 +52,14 @@ import editSize from './components/pages/sizes/editSize'
 { path:'/sizes',component:Sizes},
 { path:'/Add-size', component:AddSize},
 { path:'/edit-size/:slug',component:editSize },
-      ]
+
+///frontend routes here------------------------------
+// { path:'/',
+// name:Index,
+// component:Index },
+
+
+]
      
   })
 

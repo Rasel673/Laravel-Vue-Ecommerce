@@ -13,6 +13,7 @@
 	width:100%;
 	height:auto;
 	overflow: hidden;
+
 }
 .nivoSlider img {
 	position:absolute;
@@ -154,4 +155,13 @@
 .nivo-controlNav a.active {
 	font-weight:bold;
 	transition: all 0.5s ease 0s;
+}
+
+/* categories css here */
+.categories label{
+	background-color:#fe5858; color:#fff;
+}
+
+.categories a i{
+	float: right;
 }

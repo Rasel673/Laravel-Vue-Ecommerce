@@ -3387,6 +3387,7 @@ a.meanmenu-reveal{display:none}
 	width:100%;
 	height:auto;
 	overflow: hidden;
+
 }
 .nivoSlider img {
 	position:absolute;
@@ -3528,6 +3529,15 @@ a.meanmenu-reveal{display:none}
 .nivo-controlNav a.active {
 	font-weight:bold;
 	transition: all 0.5s ease 0s;
+}
+
+/* categories css here */
+.categories label{
+	background-color:#fe5858; color:#fff;
+}
+
+.categories a i{
+	float: right;
 }
 /* 
  * 	Core Owl Carousel CSS File

@@ -1,12 +1,14 @@
-       <!-- slider-section-start -->
+<template>
+<div>
+         <!-- slider-section-start -->
        <div class="main-slider-one main-slider-two slider-area">
         <div id="wrapper" class="container" style="padding-top:1% !important">
         <div class="row">
 
             <div class="slider-wrapper col-md-9">
                 <div id="mainSlider" class="nivoSlider">
-                    <img src="{{asset('frontend/img')}}/slider/home2/1.jpg" alt="main slider" title="#htmlcaption"/>
-                    <img src="{{asset('frontend/img')}}/slider/home2/2.jpg" alt="main slider" title="#htmlcaption2"/>
+                    <img src="frontend/img/slider/home2/1.jpg" alt="main slider" title="#htmlcaption"/>
+                    <img src="frontend/img/slider/home2/2.jpg" alt="main slider" title="#htmlcaption2"/>
                 </div>
                 <div id="htmlcaption" class="nivo-html-caption slider-caption">
                     <div class="container">
@@ -51,10 +53,23 @@
                         <button type="button" class="list-group-item list-group-item-action" aria-current="true">
                         <a> <b>Child Dream's</b><i class="fa fa-chevron-right"  aria-hidden="true"></i></a></button>
                     <button type="button" class="list-group-item list-group-item-action" aria-current="true">
-                      <a><b>Festivals</b><i class="fa fa-chevron-right" aria-hidden="true"></i></a></button>
+                      <a><b>Festivals</b><i class="fa fa-chevron-right"  aria-hidden="true"></i></a></button>
                   </div>
             </div>
         </div>							
         </div>
     </div>
     <!-- slider section end -->
+</div>
+</template>
+
+<script>
+export default {
+data(){
+    return{
+        
+    }
+}
+}
+</script>
+
