@@ -49,7 +49,7 @@
                         </li>
                     </ul>
                     <div class="right floatright">
-                        <form action="#" method="get">
+                        <form  method="get">
                             <button type="submit"><i class="mdi mdi-magnify"></i></button>
                             <input type="text" placeholder="Search within these results..." />
                         </form>
@@ -72,7 +72,7 @@
 							<div class="mainmenu">
 								<nav>
 									<ul>
-										<li><a href="index.html">Home</a>
+										<li><router-link to="/">Home</router-link>
 									
 										</li>
 										<li><a href="shop.html">Shop</a>

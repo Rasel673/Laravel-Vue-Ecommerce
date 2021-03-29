@@ -5,9 +5,8 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     state: {
       categories:[]
-
     },
-    getters:{
+  getters:{
    categories(state){
 return state.categories;
    }
@@ -15,18 +14,18 @@ return state.categories;
     },
     actions:{
       allCategory(data){
-        axios.get('/categories').then(response=>{
-           data.commit('getCategories', response.data.categories.data);
+        axios.get('/index').then(response=>{
+           data.commit('getCategories', response.data.categories);
+           console.log(response.data.categories);
         }).catch(error=>{
-    
         });
       }
     },
-    mutations: {
+mutations: {
    getCategories(state,data){
       return state.categories=data;
     }
-      
+       
     }
   })
 

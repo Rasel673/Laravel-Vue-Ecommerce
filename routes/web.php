@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('frontend.layouts.interface');});
 
 Auth::routes();
-
+///backend routes============================================================================
 Route::get('/home', 'HomeController@index')->name('home');
 // Route::get('/{anypath}', 'HomeController@index')->name('path','*.');
 /// Category Controller---------------------------
@@ -30,4 +30,7 @@ Route::resource('products', 'Backend\ProductController');
 Route::resource('sizes', 'Backend\SizeController');
 //Color Controller-----------------------
 Route::resource('colors', 'Backend\ColorController');
-
+///Slider route here------------------------------
+Route::resource('sliders','Backend\SliderController');
+///frontene routes====================================================
+Route::get('index','Frontend\IndexController@index');

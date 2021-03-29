@@ -63,6 +63,12 @@
                 Sizes
             </router-link>
           </li>
+          <li class="nav-item active">
+            <router-link to="/slider" class="nav-link" active-class="active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+                Slider
+            </router-link>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

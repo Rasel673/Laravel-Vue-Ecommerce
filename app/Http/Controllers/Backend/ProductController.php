@@ -135,7 +135,7 @@ class ProductController extends Controller
            $colorProduct =Product_Color::select('color_id')->where('product_id',$id)->get();
            if(count($colorProduct)>0){
            foreach($colorProduct as $colorID){
-                   $colors[]=Color::select('color_name')->where('color_id',$colorID['color_id'])->get();
+                   $colors[]=Color::select('color_name','color_value')->where('color_id',$colorID['color_id'])->get();
            }
    
     ///color value insert insert single product array-------

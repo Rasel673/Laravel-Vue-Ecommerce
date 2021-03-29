@@ -23,6 +23,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div id="htmlcaption2" class="nivo-html-caption slider-caption">
                     <div class="container">
                         <div class="slider-left two-caption-text slider-right">
@@ -40,20 +41,24 @@
                         </div>
                     </div>
                 </div>
+                
             </div>
 
+
+            <!-- categories show section start here -->
             <div class="col-md-3">
                 <div class="list-group categories">
                     <label class="list-group-item list-group-item-action" aria-current="true">
-                    <h4><i class="fa fa-bars" aria-hidden="true"></i> Categories</h4></label>
-                    <button type="button" class="list-group-item list-group-item-action" aria-current="true">
-                      <a><b>Men's Fashion</b><i class="fa fa-chevron-right" aria-hidden="true"></i></a></button>
-                      <button type="button" class="list-group-item list-group-item-action" aria-current="true">
+                    <h4><i class="fa fa-bars" aria-hidden="true"></i> Categories</h4></label>         
+                    <button type="button" class="list-group-item list-group-item-action" aria-current="true" v-for="category in categories" :key="category.id">
+                      <a><b>{{category.name}}</b><i class="fa fa-chevron-right" aria-hidden="true"></i></a></button>
+
+                      <!-- <button type="button" class="list-group-item list-group-item-action" aria-current="true">
                         <a><b>Woman's Trending</b><i class="fa fa-chevron-right"  aria-hidden="true"></i></a></button>
                         <button type="button" class="list-group-item list-group-item-action" aria-current="true">
                         <a> <b>Child Dream's</b><i class="fa fa-chevron-right"  aria-hidden="true"></i></a></button>
                     <button type="button" class="list-group-item list-group-item-action" aria-current="true">
-                      <a><b>Festivals</b><i class="fa fa-chevron-right"  aria-hidden="true"></i></a></button>
+                      <a><b>Festivals</b><i class="fa fa-chevron-right"  aria-hidden="true"></i></a></button> -->
                   </div>
             </div>
         </div>							
@@ -67,9 +72,29 @@
 export default {
 data(){
     return{
-        
+     categories:[],
     }
-}
+},
+mounted(){
+// this.$store.dispatch('allCategory');
+this.getCategory();
+ },
+//  computed:{
+// categories(){
+//     return this.$store.getters.categories;
+// }
+//  },
+ methods:{
+     ///get  all category information--------------
+    getCategory(){
+      axios.get('/index').then((response)=>{
+       this.categories=response.data.categories;
+       console.log("loaded");
+      }).catch((error)=>{
+
+      });
+    },
+ }
 }
 </script>
 

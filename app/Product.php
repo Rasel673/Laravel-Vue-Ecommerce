@@ -23,20 +23,23 @@ protected $fillable=[
 
 ];
 
-public function product_color()
-{
-    return $this->hasOne('App\Product_Color','product_id');
-}
-public function product_size()
-{
-    return $this->hasOne('App\Product_Size','product_id');
-}
-public function category()
-{
-    return $this->belongsTo('App\Category','categories_id','');
-}
-public function brand()
-{
-    return $this->belongsTo('App\Brand','brand_id','');
-}
+// public function product_color()
+// {
+//     return $this->hasOne('App\Product_Color','product_id');
+// }
+// public function product_size()
+// {
+//     return $this->hasOne('App\Product_Size','product_id');
+// }
+// public function category()
+// {
+//     return $this->belongsTo('App\Category','categories_id','');
+// }
+// public function brand()
+// {
+//     return $this->belongsTo('App\Brand','brand_id','');
+// }
+
+
+
 }

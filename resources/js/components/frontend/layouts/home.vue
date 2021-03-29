@@ -2,7 +2,6 @@
 <div>
 <slider></slider>
 <product></product>
-     
 </div>
 </template>
 
@@ -20,7 +19,6 @@ export default{
         'slider':slide,
         'product':Product
         
-    }
-   
+    },
 }
 </script>
