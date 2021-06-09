@@ -16,9 +16,9 @@ class SliderController extends Controller
      */
     public function index()
     {
-        $slider=Slider::paginate(3);
+        $sliders=Slider::paginate(3);
         return response()->json([
-            'slider'=>$sliders
+            'sliders'=>$sliders
         ],200);
     }
 

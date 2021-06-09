@@ -24,8 +24,11 @@ Vue.component(AlertError.name, AlertError)
 Vue.component('pagination', require('laravel-vue-pagination'));
 
 // route register hete---------------------------
-import router from './router'
-Vue.component('dashboard-component', require('./components/pages/dashboard.vue').default);
+import router from './router';
+
+Vue.component('admin-home', require('./components/backend/layouts/AdminHome').default);
+Vue.component('admin-login', require('./components/backend/admin/adminLogin').default);
+
 
 //vuex register here-----------------------
 import store from './store'

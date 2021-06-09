@@ -18,40 +18,38 @@
 													<div class="single-quick-image text-center">
 														<div class="list-img">
 															<div class="product-img tab-content">
-																<!-- <div class="simpleLens-container tab-pane fade in" id="sin-1">
+																<div class="simpleLens-container tab-pane fade in" id="sin-1">
 																	<div class="pro-type">
 																		<span>new</span>
 																	</div>
 																	<a class="simpleLens-image" data-lens-image="frontend/img/products/z1.jpg" href="#"><img src="frontend/img/products/z1.jpg" alt="" class="simpleLens-big-image"></a>
-																</div> -->
-
-																<!-- <div class="simpleLens-container tab-pane active fade in" id="sin-2" v-for="product in products.product" :key="product.product_id">
-																	<div class="pro-type sell">
-																		<span>sell</span>
-																	</div>
-																	<a class="simpleLens-image" data-lens-image="frontend/img/products/z1.jpg" href="#"><img src="frontend/img/products/z1.jpg" alt="" class="simpleLens-big-image"></a>
-																</div> -->
-
-
-																<div class="simpleLens-container tab-pane active fade in" id="sin-2" v-for="product in products.product" :key="product.product_id">
-																	<div class="pro-type sell">
-																		<span>sell</span>
-																	</div>
-																	<a class="simpleLens-image" :data-lens-image="'Product_photo/'+product.product_photo" href="#"><img :src="'Product_photo/'+product.product_photo" alt="" class="simpleLens-big-image" height="470" width="610"></a>
 																</div>
 
-																<!-- <div class="simpleLens-container tab-pane fade in" id="sin-3">
+											
+
+
+																<div class="simpleLens-container tab-pane  fade in" id="sin-2" >
+																	<div class="pro-type sell">
+																		<span>sell</span>
+																	</div>
+																	 <a class="simpleLens-image" data-lens-image="frontend/img/products/z2.jpg" href="#"><img src="frontend/img/products/z2.jpg" alt="" class="simpleLens-big-image"></a>
+																</div>
+
+																<div class="simpleLens-container active tab-pane fade in" id="sin-1" v-for="product in products.product" :key="product.product_id">
 																	<div class="pro-type">
 																		<span>-15%</span>
 																	</div>
-																	<a class="simpleLens-image" data-lens-image="frontend/img/products/z3.jpg" href="#"><img src="frontend/img/products/z3.jpg" alt="" class="simpleLens-big-image"></a>
-																</div> -->
-																<!-- <div class="simpleLens-container tab-pane fade in" id="sin-4">
+																	<a class="simpleLens-image"  :data-lens-image="'Product_photo/'+product.product_photo" href="#"><img :src="'Product_photo/'+product.product_photo" alt="" class="simpleLens-big-image"></a>
+																</div>
+
+
+
+																<div class="simpleLens-container tab-pane fade in" id="sin-4">
 																	<div class="pro-type">
 																		<span>new</span>
 																	</div>
 																	<a class="simpleLens-image" data-lens-image="frontend/img/products/z4.jpg" href="#"><img src="frontend/img/products/z4.jpg" alt="" class="simpleLens-big-image"></a>
-																</div> -->
+																</div>
 															</div>
 														</div>
 													</div>
@@ -64,17 +62,7 @@
 															<li><a data-toggle="tab" href="#sin-4"> <img src="frontend/img/products/s4.jpg" alt="small image" /> </a></li>
 														</ul>
 													</div> -->
-														<div class="share-tag clearfix">
-															<ul class="blog-share floatleft">
-																<li><h5>share </h5></li>
-																<li><a href="#"><i class="mdi mdi-facebook"></i></a></li>
-																<li><a href="#"><i class="mdi mdi-twitter"></i></a></li>
-																<li><a href="#"><i class="mdi mdi-linkedin"></i></a></li>
-																<li><a href="#"><i class="mdi mdi-vimeo"></i></a></li>
-																<li><a href="#"><i class="mdi mdi-dribbble"></i></a></li>
-																<li><a href="#"><i class="mdi mdi-instagram"></i></a></li>
-															</ul>
-														</div>
+													
 												</div>						
 											</div>
 
@@ -82,8 +70,6 @@
 											<div class="col-xs-12 col-sm-7 col-md-8">
 												<div class="quick-right">
 													<div class="list-text" v-for="product in products.product" :key="product.product_id">
-
-														
 														<h3>{{product.product_name}}</h3>
 														<span>{{product.category}}</span>
 												<!-- rating star of product -->
@@ -107,15 +93,16 @@
 																<h5>Color</h5>
 																<div class="color-select clearfix">
 
-																	<select class="custom-select" style="border:2px solid gray;">
-																		<option selected>Choose color...</option>
-																		<option v-for="color in products.colors" :key="color.color_id" :value="color.color_id"><strong>{{color.color_name}}</strong></option>
+																	<select class="custom-select text-center" style="border:2px solid gray; padding-right:5" v-model="cartcolor">
+																		 <option selected>Choose color...</option>
+																		<option v-for="color in products.colors" :key="color.color_id"><strong >{{color.color_name}}</strong></option>
 																	</select>
 																	<!-- <ul class="list-inline">
-																	<li  class="list-inline-item" v-for="color in products.colors" :key="color.color_id"><button>{{color.color_name}}</button>
-																	</li></ul>
-																	<span></span>
-																	<span class="outline"></span>
+																	<li  class="list-inline-item" v-for="color in products.colors" :key="color.color_id">
+																		<span :style="'background:'+color.color_value+'!important'" class="outline" value=""></span>
+																	</li></ul> -->
+																
+																	<!-- <span class="outline"></span>
 																	<span></span>
 																	<span></span> -->
 																</div>
@@ -125,17 +112,18 @@
 																<h5>size</h5>
 																<div class="size-drop">
 																	
-																		<!-- <button type="button" class="btn">XL</button> -->
-																		<!-- <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																		<!-- <button type="button" class="btn">XL</button>
+																		<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 																			<span class=""><i class="mdi mdi-chevron-down"></i></span>
 																		</button> -->
-
-																		<select class="custom-select" style="border:2px solid gray;">
-																		<option selected><h5>Choose Size...</h5></option>
+                                                                          
+																		<select class="custom-select" style="border:2px solid gray;" v-model="cartsize" placeholder="Select Size">
+					
+																	<option selected>Choose size...</option>
 																		<option v-for="size in products.sizes" :key="size.size_id"><strong>{{size.size_name}}</strong></option>
 																	</select>
 																		<!-- <ul class="dropdown-menu">
-																			<li v-for="size in products.sizes" :key="size.size_id"><a href="#">{{size.size_name}}</a></li>
+																			<li v-for="size in products.sizes" :key="size.size_id" ><input type="radio" :value="size.size_name" v-model="cartsize"/>{{size.size_name}}</li>
 																			<li><a href="#">SL</a></li>
 																			<li><a href="#">S</a></li>
 																			<li><a href="#">L</a></li>
@@ -146,13 +134,13 @@
 
 															<div class="s-shoose">
 																<h5>qty</h5>
-																<form action="#" method="POST">
+																
 																	<div class="plus-minus">
-																		<a class="dec qtybutton">-</a>
-																		<input type="text" value="02" name="qtybutton" class="plus-minus-box">
-																		<a class="inc qtybutton">+</a>
+																		<a class="dec qtybutton"  @click="decrement">-</a>
+																		<input type="text" v-model="qty" name="qtybutton" class="plus-minus-box">
+																		<a class="inc qtybutton" @click="qty++">+</a>
 																	</div>
-																</form>
+										
 															</div>
 
 														</div>
@@ -161,12 +149,12 @@
 
 
 														<div class="list-btn">
-															<a href="#">add to cart</a>
+															<a @click="addToCart">add to cart</a>
 															<a href="#">wishlist</a>
-															<a href="#">zoom</a>
+						
 														</div>
 
-														<!-- <div class="share-tag clearfix">
+														<div class="share-tag clearfix">
 															<ul class="blog-share floatleft">
 																<li><h5>share </h5></li>
 																<li><a href="#"><i class="mdi mdi-facebook"></i></a></li>
@@ -176,16 +164,13 @@
 																<li><a href="#"><i class="mdi mdi-dribbble"></i></a></li>
 																<li><a href="#"><i class="mdi mdi-instagram"></i></a></li>
 															</ul>
-														</div> -->
+														</div>
 
 													</div>
 												</div>
 											</div>
 										</div>
-
-
 									</div>
-
 							</div>
 							</div>
 						</div>
@@ -203,10 +188,18 @@ export default {
 data(){
     return{
 products:[],
-    }
+cartProduct:{},
+cartcolor:null,
+cartsize:null,
+qty:1,
+}
 },
+
 mounted(){
 this.getProduct();
+},
+computed:{
+
 },
 methods:{
 	///get single Product information--------------
@@ -215,11 +208,29 @@ methods:{
        let vm=this;
       axios.get('products/'+id).then((response)=>{
        vm.products=response.data;
-       
       }).catch((error)=>{
 
       });
     },
+	decrement(){
+		if(this.qty>1){
+        this.qty=this.qty-1;
+		}
+		
+	},
+	addToCart(){
+		let vm=this;
+		this.products.product.forEach(item => {
+				vm.cartProduct=item;
+			});
+		this.$store.commit("addToCart",{
+        product:this.cartProduct,
+		color:this.cartcolor,
+		size:this.cartsize,
+		qty:this.qty
+		});	
+			
+		}
 }
 }
 </script>

@@ -291,7 +291,7 @@ Product::where('slug',$slug)->update([
         $dltimg=Product::where('slug',$slug)->select('products.product_photo')->first();
         $deleteImg=unlink(base_path('public/Product_photo/'.$dltimg->product_photo));
         if($deleteImg){
-            $delete=Product::where('slug',$slug)->delete();
+        $delete=Product::where('slug',$slug)->delete();
             return response()->json(['Delete Success'],200);
         }else{
             return response()->json(['Delete Failed'],500);

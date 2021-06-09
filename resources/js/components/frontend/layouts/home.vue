@@ -6,17 +6,16 @@
 </template>
 
  <script>
- import slide from '../partial/slider.vue';
+ import slider from '../partial/slider.vue';
  import Product from '../product/product.vue';
 export default{
-    name:"Home",
     data(){
         return{
 
         }
     },
     components:{
-        'slider':slide,
+        'slider':slider,
         'product':Product
         
     },

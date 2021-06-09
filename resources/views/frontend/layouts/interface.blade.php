@@ -76,10 +76,10 @@
 		<!-- all js here -->
         <script src="{{asset('js/app2.js')}}"></script>
 		<!-- jquery latest version -->
-        <script src="{{asset('frontend/js/vendor/jquery-1.12.3.min.js')}}"></script>
+        {{-- <script src="{{asset('frontend/js/vendor/jquery-1.12.3.min.js')}}"></script> --}}
         
 		<!-- bootstrap js -->
-        <script src="{{asset('frontend/js/bootstrap.min.js')}}"></script>
+        {{-- <script src="{{asset('frontend/js/bootstrap.min.js')}}"></script> --}}
 		<!-- owl.carousel js -->
         <script src="{{asset('frontend/js/owl.carousel.min.js')}}"></script>
 		<!-- meanmenu js -->
@@ -87,15 +87,15 @@
 		{{-- <!-- countdown JS -->
         <script src="{{asset('frontend/js/countdown.js')}}"></script> --}}
 		<!-- nivo.slider JS -->
-        <script src="{{asset('frontend/js/jquery.nivo.slider.pack.js')}}"></script>
+        {{-- <script src="{{asset('frontend/js/jquery.nivo.slider.pack.js')}}"></script> --}}
 		<!-- simpleLens JS -->
-        <script src="{{asset('frontend/js/jquery.simpleLens.min.js')}}"></script>
+        {{-- <script src="{{asset('frontend/js/jquery.simpleLens.min.js')}}"></script> --}}
 		<!-- jquery-ui js -->
-        <script src="{{asset('frontend/js/jquery-ui.min.js')}}"></script>
+        {{-- <script src="{{asset('frontend/js/jquery-ui.min.js')}}"></script> --}}
 		<!-- load-more js -->
-        <script src="{{asset('frontend/js/load-more.js')}}"></script>
+        {{-- <script src="{{asset('frontend/js/load-more.js')}}"></script> --}}
 		<!-- plugins js -->
-        <script src="{{asset('frontend/js/plugins.js')}}"></script>
+        {{-- <script src="{{asset('frontend/js/plugins.js')}}"></script> --}}
 		<!-- main js -->
         <script src="{{asset('frontend/js/main.js')}}"></script>
 	

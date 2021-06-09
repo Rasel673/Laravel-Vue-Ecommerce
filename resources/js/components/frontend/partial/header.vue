@@ -25,12 +25,13 @@
                             <ul>
                             
                                 <!-- @auth -->
-                                <li><a href="#">My account</a></li>
+                                <li v-if="authenicted"><router-link  to="/my-account">My Account</router-link></li>
                                 <!-- @else -->
-                                <li><a href="#">Login</a></li>
+                                <li v-if="!authenicted"><router-link  to="/login">Login</router-link></li>
+                                <li v-if="authenicted"><a href="#" @click.prevent="logout()">Logout</a></li>
 
                                 <!-- @if (Route::has('register')) -->
-                                <li><a href="#">Registar</a></li>
+                                <li v-if="!authenicted"><a href="#">Registar</a></li>
                                 <!-- @endif
                                 
                                 @endauth -->
@@ -41,10 +42,11 @@
                         <li>
                             <a href="#"><i class="mdi mdi-settings"></i></a>
                             <ul>
-                                <li><a href="my-account.html">My account</a></li>
-                                <li><a href="cart.html">My cart</a></li>
-                                <li><a href="wishlist.html">My wishlist</a></li>
-                                <li><a href="checkout.html">Check out</a></li>
+                                <li v-if="authenicted"><router-link  to="/my-account">My Account</router-link></li>
+                                <li><router-link to="/cart">My cart</router-link></li>
+                                <li><router-link to="/wishlist">My wishlist</router-link></li>
+                                <li><router-link to="/checkout">Checkout</router-link></li>
+                              
                             </ul>
                         </li>
                     </ul>
@@ -72,10 +74,12 @@
 							<div class="mainmenu">
 								<nav>
 									<ul>
-										<li><router-link to="/">Home</router-link>
+										<li><router-link active-class="active" exact to="/">Home</router-link>
 									
 										</li>
-										<li><a href="shop.html">Shop</a>
+
+
+										<li><router-link active-class="active" exact to="/shop">Shop</router-link>
 										</li>
 										
 										<li><a href="blog.html">Blog</a>
@@ -91,9 +95,9 @@
 								<div class="mobile-menu">
 									<nav id="dropdown">
 										<ul>
-											<li><a href="index.html">Home</a>
+											<li><router-link to="/">Home</router-link></li>
 											
-											<li><a href="shop.html">Shop</a>
+										<li><router-link to="/shop">Home</router-link>
 												
 													</li>
 													
@@ -117,34 +121,34 @@
     <div class="cart-itmes">
         <a class="cart-itme-a" href="cart.html">
             <i class="mdi mdi-cart"></i>
-            02 items :  <strong>$86.00</strong>
+            {{carts.length}} items :  <strong>${{total}}</strong>
         </a>
         <div class="cartdrop">
-            <div class="sin-itme clearfix">
-                <i class="mdi mdi-close"></i>
-                <a class="cart-img" href="cart.html"><img src="frontend/img/cart/1.png" alt="" /></a>
+             
+            <div class="sin-itme clearfix" v-for="(cart,index) in carts" :key="index">
+                <i class="mdi mdi-close"  @click="remove(index)"></i>
+                <a class="cart-img" href="cart.html"><img :src="'Product_photo/'+cart.product.product_photo" alt=""  height="108" width="83"/></a>
                 <div class="menu-cart-text">
-                    <a href="#"><h5>men’s black t-shirt</h5></a>
-                    <span>Color :  Black</span>
-                    <span>Size :     SL</span>
-                    <strong>$122.00</strong>
+                    <a href="#"><h5>{{cart.product.product_name}}</h5></a>
+                    <span v-if="cart.color !=null">Color :  {{cart.color}}</span>
+                    <span v-if="cart.size !=null">Size :   {{cart.size}}</span>
+                    <span>Quantity :  {{cart.qty}}</span>
+                    <strong>${{cart.product.product_price}}</strong>
                 </div>
             </div>
-            <div class="sin-itme clearfix">
-                <i class="mdi mdi-close"></i>
-                <a class="cart-img" href="cart.html"><img src="frontend/img/cart/2.png" alt="" /></a>
-                <div class="menu-cart-text">
-                    <a href="#"><h5>men’s black t-shirt</h5></a>
-                    <span>Color :  Black</span>
-                    <span>Size :     SL</span>
-                    <strong>$132.00</strong>
+
+            <div class="sin-itme clearfix" v-if="carts.length==0">
+                <div class="menu-cart-text text-center">
+                    <a><h5>No item selected..</h5></a>
+                    <span>Please choose your product.</span>
+                    
                 </div>
             </div>
             <div class="total">
-                <span>total <strong>= $306.00</strong></span>
+                <span>total <strong>= ${{total}}</strong></span>
             </div>
-            <a class="goto" href="cart.html">go to cart</a>
-            <a class="out-menu" href="checkout.html">Check out</a>
+            <router-link class="goto" to="/cart">go to cart</router-link>
+            <router-link class="out-menu" to="/checkout">Check out</router-link>
         </div>
     </div>
 </div>
@@ -160,6 +164,36 @@ data(){
     return{
         
     }
+},
+computed:{
+carts(){
+    return this.$store.getters.getCart;
+    
+},
+total(){
+    return this.$store.getters.getTotal;
+},
+authenicted(){
+return this.$store.getters.authenicated;
 }
+ },
+ methods:{
+     remove(index){
+         this.$store.commit("removeCart",index);
+     },
+     logout(){
+         axios.post('/logout').then(resposnse=>{
+       this.$store.commit("authenicatedUser",false);
+    //    this.$store.dispatch("logOut");
+       this.$router.push({path:'/login'});
+        Toast.fire({
+  icon: 'success',
+  title: 'Good Bye! See you again'
+})
+         }).catch(error=>{
+
+         });
+     }
+ }
 }
 </script>

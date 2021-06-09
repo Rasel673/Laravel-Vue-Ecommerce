@@ -39,10 +39,62 @@
        toast.addEventListener('mouseleave', Swal.resumeTimer)
      }
    })
- 
    window.Toast=Toast;
+
+
+
+
+   ///check authenication token
    
- 
+  //  let auth = localStorage.getItem("auth");
+
+  //  if(auth){
+  //      store.dispatch('authUser').then(() => {
+  //          new Vue({
+  //              router,
+  //              store,
+  //              render: h => h(App)
+  //          }).$mount('#app')
+  //      });
+  //  }else {
+  //      new Vue({
+  //          router,
+  //          store,
+  //          render: h => h(App)
+  //      }).$mount('#app')
+  //  }
+
+ // Authnication guard----------------------
+function isLoggedIn() {
+  return store.getters.authenicated;
+}
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+      // this route requires auth, check if logged in
+      // if not, redirect to login page.
+      if (!isLoggedIn()) {
+          next({
+            path:'/login',
+          })
+      } else {
+          next()
+      }
+  }else if (to.matched.some(record => record.meta.requiresVisitor)) {
+      // this route requires auth, check if logged in
+      // if not, redirect to login page.
+      if (isLoggedIn()) {
+          next({
+            path:'/',
+          })
+      } else {
+          next()
+      }
+  } else {
+      next() // make sure to always call next()!
+  }
+});
+
  const app = new Vue({
      el: '#app2',
      router,

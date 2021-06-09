@@ -2,36 +2,52 @@ window.Vue = require('vue');
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 //backend routes import==========================================
-import Dashboard from './components/pages/dashboard'
+///admin login------------------
+import AdminLogin from './components/backend/admin/adminLogin'
+//dash board-----------------------
+import Dashboard from './components/backend/dashboard'
 ///category routes-----------------------------
-import Category from './components/pages/categories/categoryList'
-import AddCategory from './components/pages/categories/addCategory'
-import editCategory from './components/pages/categories/editCategory'
+import Category from './components/backend/categories/categoryList'
+import AddCategory from './components/backend/categories/addCategory'
+import editCategory from './components/backend/categories/editCategory'
 ///brands routes---------------------
-import  Brands from './components/pages/Brands/brandList'
-import addBrand from './components/pages/Brands/addBrand'
-import editBrand from './components/pages/Brands/editBrand'
+import  Brands from './components/backend/Brands/brandList'
+import addBrand from './components/backend/Brands/addBrand'
+import editBrand from './components/backend/Brands/editBrand'
 //product routes----------------------
-import  Produtcs from './components/pages/products/productList'
-import addProcuct from './components/pages/products/addProduct'
-import editProduct from './components/pages/products/editProduct'
-import viewProduct from './components/pages/products/viewProduct'
+import  Produtcs from './components/backend/products/productList'
+import addProcuct from './components/backend/products/addProduct'
+import editProduct from './components/backend/products/editProduct'
+import viewProduct from './components/backend/products/viewProduct'
 ///color routes-----------------------------
-import Colors from './components/pages/colors/colorList'
-import AddColor from './components/pages/colors/addColor'
-import editColor from './components/pages/colors/editColor'
+import Colors from './components/backend/colors/colorList'
+import AddColor from './components/backend/colors/addColor'
+import editColor from './components/backend/colors/editColor'
 ///sizes routes-----------------------------
-import Sizes from './components/pages/sizes/sizeList'
-import AddSize from './components/pages/sizes/addSize'
-import editSize from './components/pages/sizes/editSize'
+import Sizes from './components/backend/sizes/sizeList'
+import AddSize from './components/backend/sizes/addSize'
+import editSize from './components/backend/sizes/editSize'
 ///slider routes-----------------------------
-import  Slider from './components/pages/slider/sliderList'
-import addSlider from './components/pages/slider/addSlider'
-import editSlider from './components/pages/slider/editSlider'
+import  Slider from './components/backend/slider/sliderList'
+import addSlider from './components/backend/slider/addSlider'
+import editSlider from './components/backend/slider/editSlider'
+////order routes import -------------------------------
+import Order from './components/backend/orders/orderList'
+import viewOrder from './components/backend/orders/viewOrder'
+import editOrder from './components/backend/orders/editOrder'
  const router=new VueRouter({
-//   mode:'history',
+  // mode:'history',
+  linkActiveClass:'active',
  routes:[
- { path: '/home',  component:Dashboard },
+   //admin login-----------------
+{
+path:'/login',
+component:AdminLogin,
+},
+   ////admin dashboard-----------------
+ { path: '/home',
+ name:Dashboard,
+component:Dashboard },
  //category route here---------------   
 { path:'/category',component:Category},
 { path:'/Add-category', component:AddCategory },
@@ -58,8 +74,12 @@ import editSlider from './components/pages/slider/editSlider'
 { path:'/slider',component:Slider},
 { path:'/Add-slider', component:addSlider },
 { path:'/edit-slider/:slug', component:editSlider },
-]
-     
+
+////order route--------------------
+{ path:'/orders',component:Order},
+{ path:'/edit-order/:id', component:editOrder },
+{ path:'/view-order/:id', component:viewOrder },
+]   
   })
 
   export default router;

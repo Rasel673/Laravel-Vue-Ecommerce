@@ -27,36 +27,36 @@
 	});
 /*----------------------------
  nivoSlider active
------------------------------- */
-	$('#mainSlider').nivoSlider({
-		directionNav: true,
-		animSpeed: 500,
-		effect: 'random',
-		slices: 18,
-		pauseTime: 10000,
-		pauseOnHover: false,
-		controlNav: true,
-		prevText: '<i class="mdi mdi-chevron-left"></i>',
-		nextText: '<i class="mdi mdi-chevron-right"></i>'
-	});
+// ------------------------------ */
+	// $('#mainSlider').nivoSlider({
+	// 	directionNav: true,
+	// 	animSpeed: 500,
+	// 	effect: 'random',
+	// 	slices: 18,
+	// 	pauseTime: 10000,
+	// 	pauseOnHover: false,
+	// 	controlNav: true,
+	// 	prevText: '<i class="mdi mdi-chevron-left"></i>',
+	// 	nextText: '<i class="mdi mdi-chevron-right"></i>'
+	// });
 /*----------------------------
  plus-minus-button
 ------------------------------ */
-	$(".qtybutton").on("click", function() {
-		var $button = $(this);
-		var oldValue = $button.parent().find("input").val();
-		if ($button.text() == "+") {
-			var newVal = parseFloat(oldValue) + 1;
-		} else {
-			// Don't allow decrementing below zero
-			if (oldValue > 0) {
-				var newVal = parseFloat(oldValue) - 1;
-			} else {
-				newVal = 0;
-			}
-		}
-		$button.parent().find("input").val(newVal);
-	});
+	// $(".qtybutton").on("click", function() {
+	// 	var $button = $(this);
+	// 	var oldValue = $button.parent().find("input").val();
+	// 	if ($button.text() == "+") {
+	// 		var newVal = parseFloat(oldValue) + 1;
+	// 	} else {
+	// 		// Don't allow decrementing below zero
+	// 		if (oldValue > 0) {
+	// 			var newVal = parseFloat(oldValue) - 1;
+	// 		} else {
+	// 			newVal = 0;
+	// 		}
+	// 	}
+	// 	$button.parent().find("input").val(newVal);
+	// });
 /*----------------------------
  price-slider active
 ------------------------------ */  

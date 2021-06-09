@@ -120,7 +120,7 @@ class ColorController extends Controller
             }
          
         }else{
-            return response()->json(['Delete Failed!! Color of this color exist'],400);
+            return response()->json(['Delete Failed!! Product of this color exist'],501);
         }
       
     }

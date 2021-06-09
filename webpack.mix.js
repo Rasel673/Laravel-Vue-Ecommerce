@@ -31,18 +31,15 @@ mix.js('resources/js/app.js', 'public/js')
 
     mix.js('resources/js/app2.js', 'public/js');
 
-    // mix.scripts([
+    mix.scripts([
         
-    //     'resources/frontend/js/vendor/jquery-1.12.3.min.js',
-    //     'resources/frontend/js/bootstrap.min.js',
-    //     'resources/frontend/js/owl.carousel.min.js',
-    //     'resources/frontend/js/jquery.meanmenu.js',
-    //     'resources/frontend/js/countdown.js',
-    //     'resources/frontend/js/jquery.nivo.slider.pack.js',
-    //     'resources/frontend/js/jquery.simpleLens.min.js',
-    //     'resources/frontend/js/jquery-ui.min.js',
-    //     'resources/frontend/js/load-more.js',
-    //     'resources/frontend/js/plugins.js',
-    //     'resources/frontend/js/main.js',
+        // 'resources/frontend/js/vendor/jquery-1.12.3.min.js',
+        // 'resources/frontend/js/bootstrap.min.js',
+        // 'resources/frontend/js/owl.carousel.min.js',
+        // 'resources/frontend/js/jquery.meanmenu.js',
+        // 'resources/frontend/js/jquery.simpleLens.min.js',
+        // 'resources/frontend/js/jquery-ui.min.js',
+        // 'resources/frontend/js/plugins.js',
+        // 'resources/frontend/js/main.js',
        
-    // ], 'public/frontend/all.js')
+    ], 'public/frontend/all.js')
